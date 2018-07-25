@@ -1,0 +1,163 @@
+
+<div class="card">
+    <div class="card-body">
+<h3 *ngIf="albumIdToUpdate; else  ">
+Update Album For: {{albumIdToUpdateName}}
+</h3>
+<ng-template #create>
+  <h3>Create New</h3>
+</ng-template>
+<form [formGroup]="objectForm" (ngSubmit)="onFormSubmit()">
+<table>
+  <tr>
+    <td>Enter Name</td><td><input formControlName="name" class="form-control">
+    <label *ngIf="objectForm.get('name').invalid && processValidation" [ngClass]="'error'"> Name is Required.</label>
+    </td>
+    </tr>
+    <tr>
+    <td>Enter Artist</td><td>
+        <select formControlName="artistId" class="form-control">
+          <option *ngFor="let i of artists" [value]="i.id">{{i.name}}</option>
+          <label *ngIf="objectForm.get('artistId').invalid && processValidation" [ngClass]="'error'"> Artist is Required.</label>
+        </select> 
+      </td>
+  </tr>
+  <tr>
+  <td>Enter recordLabel</td><td>
+      <select formControlName="recordLabel" class="form-control">
+        <option *ngFor="let i of recordLabels" [value]="i.id">{{i.name}}</option>
+        <!-- <label *ngIf="objectForm.get('recordLabelId').invalid && processValidation" [ngClass]="'error'"> Re is Required.</label> -->
+      </select> 
+    </td>
+</tr>
+  <tr>
+      <!-- [(ngModel)]="album$.releasedmonth" -->
+      <td>Enter Month</td><td>
+        <select formControlName="releasedMonth" class="form-control">
+          </select>
+      <!-- <label *ngIf="objectForm.get('releasedMonth').invalid && processValidation" [ngClass]="'error'"> Name is Month.</label> -->
+      </td>
+      </tr>
+      <tr>
+        <td>Enter Year</td><td><input formControlName="releasedYear" class="form-control">
+          <!-- <label *ngIf="objectForm.get('releasedYear').invalid && processValidation" [ngClass]="'error'"> Name is Year.</label>    -->
+         </td>
+        </tr>
+            <tr>
+                <td>Cover Image</td><td>
+                  
+                  
+                  <input  hidden formControlName="coverimage" class="form-control">
+                  <input class="form-control" type="file"  ng2FileSelect [uploader]="uploader" /> 
+                    
+                 <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
+                  <tr *ngFor="let item of uploader.queue">
+                      <td nowrap>
+                          <button type="button" class="btn btn-success btn-xs"
+                                  (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                              <span class="glyphicon glyphicon-upload"></span> Upload
+                          </button>
+                          <button type="button" class="btn btn-warning btn-xs"
+                                  (click)="item.cancel()" [disabled]="!item.isUploading">
+                              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                          </button>
+                          <button type="button" class="btn btn-danger btn-xs"
+                                  (click)="item.remove();removePics()">
+                              <span class="glyphicon glyphicon-trash"></span> Remove
+                          </button>
+                      </td>
+
+               </tr>
+               </td>
+               </tr>
+              
+               
+              
+  <tr>              
+ <td colspan="2">
+    <button *ngIf="!albumIdToUpdate" class="btn btn-ghost-success">Create</button>
+    <button *ngIf="albumIdToUpdate" class="btn btn-ghost-warning">Update</button>
+    <button (click)="backToCreateObject()" *ngIf="albumIdToUpdate" class="btn btn-ghost-dark">Go Back</button>
+  </td></tr>
+</table>
+
+</form>
+<br>
+<div *ngIf="statusCode; else processing">
+  <div *ngIf="statusCode === 201" [ngClass]="'success'">
+     added Sucessfully
+  </div>
+  <div *ngIf="statusCode === 200" [ngClass]="'success'">
+       added Sucessfully
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Edit Object  -->
+<div class="card">
+    <div class="card-body">
+<table class="table">
+  <tr><th>Name</th><th>Month</th><th>Year</th><th>Cover Image</th><th></th><th></th><th></th></tr>
+  <tr *ngFor="let album of albums">
+    <td>{{album.name}}</td><td>{{album.releasedMonth}}</td><td>{{album.releasedYear}}</td><td><img src="{{album.coverimage}}" width="50"/> </td>
+    <td> <button class="btn btn-warning btn-sm" (click)="getAlbum(album.id)"><i class="fa fa-edit"></i></button></td>
+    <td><button class="btn btn-danger btn-sm"  (click)="delete(album)"><i class="fa fa-times"></i> </button></td>
+    <td><a [routerLink]="['album-detail', album.id]" class="btn btn-success btn-small" >Create Songs</a></td>
+  </tr>
+</table>
+
+
+</div>
+</div>
+<!-- End Edit Code -->
+<!-- <h2>Record Label</h2> -->
+<!-- <router-outlet name="album-detail"></router-outlet> -->
+<!-- <div>
+  <label>Album name:
+    <input #albumName placeholder="Album"/> -->
+   <!-- <input #albumArtist placeholder="Artist" /> -->
+   <!-- (change)="onChange($event.target.value)" -->
+    <!-- <select #albumArtist >
+      <option *ngFor="let i of artists" [value]="i.id">{{i.name}}</option>
+  </select>
+    <input #albumReleasedMonth placeholder="Month" />
+    <input #albumReleasedYear placeholder="Year" />
+
+ 
+  </label> -->
+  <!--(click) passes input value to add() and then clears the input -->
+   <!-- <button (click)="add(albumName.value,
+                         albumArtist.value,
+                         albumReleasedMonth.value,
+                         albumReleasedYear.value
+                         ); albumName.value='';albumArtist.value='';albumReleasedMonth.value='';
+                         albumReleasedYear.value='' " >
+    add
+  </button>
+</div>  -->
+
+<!-- <ul>
+ <li *ngFor="let album of albums">
+  <!-- routerLink="/album-detail/"   (click)="onSelected(album)" -->
+  <!-- <a [routerLink]="['album-detail', album.id]" ><span class="badge">{{album.id}}</span> {{album.name}} -- {{album.artistId}} </a>
+ 
+    <button type="button" class="btn btn-primary" class="delete" title="delete recordLabel"
+    (click)="delete(album)">x</button>
+    <button class="edit" title="edit recordLabel"
+    (click)="edit(album)">edit</button>
+  </li>
+</ul> 
+
+
+<div *ngIf="album">
+  <h2>{{ album.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{album.id}}</div>
+  <div>  -->
+    <!-- <label>name:
+      <input [(ngModel)]="album.name" placeholder="name"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div> -->

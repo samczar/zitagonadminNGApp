@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {AuthGuard } from './auth.guard';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
@@ -9,11 +10,13 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
+
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '/dashboard/dashboard',
     pathMatch: 'full',
+    //canActivate: [AuthGuard]
   },
   {
     path: '404',
@@ -35,6 +38,7 @@ export const routes: Routes = [
     data: {
       title: 'Login Page'
     }
+   
   },
   {
     path: 'register',
@@ -44,8 +48,9 @@ export const routes: Routes = [
     }
   },
   {
-    path: '',
+    path: 'dashboard',
     component: DefaultLayoutComponent,
+     canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -81,7 +86,45 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
-      }
+      },
+      {
+       path: 'artist',
+       loadChildren: './views/artist/artist.module#ArtistModule'
+      },
+      {
+        path: 'users',
+        loadChildren: './views/user/user.module#UserModule'
+       },
+       {
+         path: 'genre',
+         loadChildren: './views/genre/genre.module#GenreModule'
+       }
+        ,
+       {
+         path: 'album',
+         loadChildren: './views/album/album.module#AlbumModule'
+        } 
+        ,
+        {
+          path: 'album/album-detail/:id',
+          loadChildren: './views/album/album-detail/album-detail.module#AlbumDetailModule'
+         }, 
+        {
+          path: 'single',
+          loadChildren: './views/single/single.module#SingleModule'
+         },
+        {
+          path: 'songs',
+          loadChildren: './views/songs/songs.module#SongsModule'
+         } ,
+         {
+          path: 'recordLabel',
+          loadChildren: './views/record-label/record-label.module#RecordLabelModule'
+         } ,
+         {
+           path: 'events',
+           loadChildren: './views/events/events.module#EventsModule'
+          }
     ]
   }
 ];

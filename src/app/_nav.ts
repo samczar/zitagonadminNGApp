@@ -1,28 +1,60 @@
 export const navItems = [
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: 'dashboard',
     icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Clients Management'
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
-    icon: 'icon-drop'
+    name: 'Clients',
+    url: 'users',
+    icon: 'icon-user'
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
-    icon: 'icon-pencil'
+    name: 'Artists',
+    url:'artist',
+    icon:'icon-disc'
   },
   {
+    name: 'Genre',
+    url:'genre',
+    icon:'icon-magnet'
+  },
+  {
+    name: 'Album',
+    url:'album',
+    icon:'icon-handbag'
+  },
+  {
+    name: 'Single',
+    url:'single',
+    icon:'icon-handbag'
+  },
+  {
+    name: 'Song',
+    url:'songs',
+    icon:'icon-music-tone-alt'
+  },
+  {
+    name: 'Record Label',
+    url:'recordLabel',
+    icon:'icon-music-tone-alt'
+  },
+  // {
+  //   name: 'Event',
+  //   url:'/events',
+  //   icon:'icon-compass'
+  // },
+
+  // {
+  //   name: 'Colors',
+  //   url: '/theme/colors',
+  //   icon: 'icon-drop'
+  // },
+ /** {
     title: true,
     name: 'Components'
   },
@@ -149,8 +181,8 @@ export const navItems = [
         icon: 'icon-star'
       }
     ]
-  },
-  {
+  },**/
+ /** {
     name: 'Notifications',
     url: '/notifications',
     icon: 'icon-bell',
@@ -188,44 +220,46 @@ export const navItems = [
     title: true,
     name: 'Extras',
   },
-  {
-    name: 'Pages',
-    url: '/pages',
-    icon: 'icon-star',
-    children: [
-      {
-        name: 'Login',
-        url: '/login',
-        icon: 'icon-star'
-      },
-      {
-        name: 'Register',
-        url: '/register',
-        icon: 'icon-star'
-      },
-      {
-        name: 'Error 404',
-        url: '/404',
-        icon: 'icon-star'
-      },
-      {
-        name: 'Error 500',
-        url: '/500',
-        icon: 'icon-star'
-      }
-    ]
-  },
-  {
+  **/
+//  {
+//     name: 'Pages',
+//     url: '/pages',
+//     icon: 'icon-star',
+//     children: [
+//       {
+//         name: 'Login',
+//         url: '/login',
+//         icon: 'icon-star'
+//       },
+//       {
+//         name: 'Register',
+//         url: '/register',
+//         icon: 'icon-star'
+//       },
+//       {
+//         name: 'Error 404',
+//         url: '/404',
+//         icon: 'icon-star'
+//       },
+//       {
+//         name: 'Error 500',
+//         url: '/500',
+//         icon: 'icon-star'
+//       }
+//     ]
+//   },
+ /** {
     name: 'Download CoreUI',
     url: 'http://coreui.io/angular/',
     icon: 'icon-cloud-download',
     class: 'mt-auto',
     variant: 'success'
   },
-  {
+   {
     name: 'Try CoreUI PRO',
     url: 'http://coreui.io/pro/angular/',
     icon: 'icon-layers',
     variant: 'danger'
-  }
+  }**/
+
 ];

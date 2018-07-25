@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-body">
+<h3 *ngIf="genreIdToUpdate; else  ">
+Update Genre For: {{genreIdToUpdateName}}
+</h3>
+<ng-template #create>
+  <h3>Create New Genre</h3>
+</ng-template>
+<form [formGroup]="genreForm" (ngSubmit)="onGenreFormSubmit()">
+<table>
+  <tr class="form-group">
+    <td><input class="form-control" formControlName="name" placeholder="Genre Name">
+    <label *ngIf="genreForm.get('name').invalid && processValidation" id="name" [ngClass]="'error'"> Name is Required.</label>
+    </td>
+  </tr>
+  <tr><td colspan="2">
+    <button class="btn btn-success" *ngIf="!genreIdToUpdate">Create</button>
+    <button class="btn btn-ghost-warning" *ngIf="genreIdToUpdate">Update</button> &nbsp;&nbsp;
+    <button class="btn btn-ghost-dark"  (click)="backToCreateGenre()" *ngIf="genreIdToUpdate">Go Back</button>
+  </td></tr>
+</table>
+
+</form>
+<br>
+<div *ngIf="statusCode; else processing">
+  <div *ngIf="statusCode === 201" [ngClass]="'success'">
+    Article added Sucessfully
+  </div>
+  <div *ngIf="statusCode === 200" [ngClass]="'success'">
+      Article added Sucessfully
+    </div>
+</div>
+</div>
+</div>
+<!-- <div class="card">
+    <div class="card-body">
+        <div class="form-group">
+    
+  <label>Genre name:
+
+    <input class="form-control" type="text" placeholder ="Genre Name" #genreName />
+ 
+  </label> &nbsp;&nbsp; -->
+  <!--(click) passes input value to add() and then clears the input -->
+   <!-- <button class="btn btn-primary" (click)="add(genreName.value); genreName.value='' " >
+      <i class="fa fa-plus"></i>
+  </button>
+ </form>
+</div> 
+</div>
+</div> -->
+<div class="card">
+    <div class="card-body">
+<table class="table">
+  <tr><th>Name</th><th></th><th></th></tr>
+  <tr *ngFor="let genre of genres">
+    <td>{{genre.name}}</td>
+    <td> <button class="btn btn-warning btn-sm" (click)="getGenre(genre.id)"><i class="fa fa-edit"></i></button></td>
+    <td><button class="btn btn-danger btn-sm"  (click)="delete(genre)"><i class="fa fa-times"></i> </button></td>
+  </tr>
+</table>
+
+
+</div>
+</div>
+<!-- genre from @input() -->
+ <!-- <div *ngIf="getGenre"> 
+    <h2>{{ genre.name | uppercase }} Details</h2>
+    <div><span>id: </span>{{genre.id}}</div>
+    <div>
+      <label>name:
+        <input [(ngModel)]="genre.name" placeholder="name"/>
+      </label>
+    </div>
+    <button (click)="goBack()">go back</button>
+    <button (click)="save()">save</button>
+ </div>  -->
+  

@@ -2,11 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import {User} from '../login/user';
+import {UserService} from '../login/user.service';
+
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  providers:[UserService]
+
 })
 export class DashboardComponent implements OnInit {
+currentUser: User;
+  users: User[] = [];
+
+  constructor() {
+   this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+   console.log(this.currentUser)
+}
+
+OnInit(){
+
+}
+  
 
   // lineChart1
   public lineChart1Data: Array<any> = [
@@ -384,6 +401,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData3.push(65);
     }
   }
-
+ 
   radioModel: string = 'Month';
 }
+

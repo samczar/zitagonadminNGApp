@@ -1,0 +1,102 @@
+<div class="card">
+    <div class="card-body">
+<h3 *ngIf="objectIdToUpdate; else  ">
+Update Artist For: {{objectToUpdateName}}
+</h3>
+<ng-template #create>
+  <h3>Create New</h3>
+</ng-template>
+<form [formGroup]="objectForm" (ngSubmit)="onFormSubmit()">
+<table class="form-row">
+  <tr>
+    <td class="form-group col-md-6">
+    <label for="name">Name</label>
+        <input class="form-control" formControlName="name" placeholder="Name" id="name">
+    <label *ngIf="objectForm.get('name').invalid && processValidation" [ngClass]="'error'"> Name is Required.</label>
+    </td>
+    </tr>
+    <tr>
+ <td class="form-group col-md-6">
+    <label for="country">Country</label>
+    <select formControlName="country" class="form-control" placeholder="Country" id="country">
+        <option value="Ghana">Ghana</option>
+        <option value="Nigeria">Nigeria</option>   
+        <!-- <option *ngFor="let i of country" [value]="i.name">{{i.name}}</option> -->
+    </select>
+
+        <!-- <label *ngIf="objectForm.get('picsUrl').invalid && processValidation" [ngClass]="'error'"> Country is Required.</label> -->
+      </td>
+  </tr>
+  <tr>
+        <td class="form-group col-md-6">
+                <label for="imageUrl">ImageUrl</label>
+                <input class="form-control" type="file"  ng2FileSelect [uploader]="uploader" /> 
+                <input  hidden type="text" class="form-control" formControlName="picsUrl" >
+                <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
+                <tr *ngFor="let item of uploader.queue">
+                        <td nowrap>
+                            <button type="button" class="btn btn-success btn-xs"
+                                    (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                <span class="glyphicon glyphicon-upload"></span> Upload
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs"
+                                    (click)="item.cancel()" [disabled]="!item.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs"
+                                    (click)="item.remove();removePics()">
+                                <span class="glyphicon glyphicon-trash"></span> Remove
+                            </button>
+                        </td>
+                    </tr>
+      <!-- <label *ngIf="objectForm.get('picsUrl').invalid && processValidation" [ngClass]="'error'"> Pics is Required.</label> -->
+      </td>
+      </tr>
+      <tr>
+        <td class="form-group col-md-6">
+        <label for="bio">Biography</label>
+           <textarea class="form-control" formControlName="bio" placeholder="Biography" id="bio"></textarea>
+          <!-- <label *ngIf="objectForm.get('bio').invalid && processValidation" [ngClass]="'error'"> Bio is Required.</label>    -->
+         </td>
+   
+  <tr><td colspan="2">
+   &nbsp;&nbsp; <button class="btn btn-ghost-success"  *ngIf="!objectIdToUpdate">Create</button>
+   &nbsp;&nbsp; <button  class="btn btn-ghost-warning"   *ngIf="objectIdToUpdate">Update</button>
+  
+   &nbsp;<button  class="btn btn-ghost-dark"  (click)="backToCreateObject()"    *ngIf="objectIdToUpdate">Go Back</button>
+  </td></tr>
+</table>
+
+
+</form>
+<br>
+<div *ngIf="statusCode; else processing">
+  <div *ngIf="statusCode === 201" [ngClass]="'success'">
+     added Sucessfully
+  </div>
+  <div *ngIf="statusCode === 200" [ngClass]="'success'">
+       added Sucessfully
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- Edit Object  -->
+<div class="card">
+    <div class="card-body">
+<table class="table">
+  <tr><th>Name</th><th>Country</th><th>Pics</th><th>Image</th><th></th><th></th></tr>
+  <tr *ngFor="let artist of artists">
+   <td>{{artist.name}}</td><td>{{artist.country}}</td><td>{{artist.picsUrl}}</td><td> <img src="{{artist.picsUrl}}" width="50" /></td>
+    <td> <button class="btn btn-warning btn-sm" (click)="getObject(artist.id)"><i class="fa fa-edit"></i></button></td>
+    <td><button class="btn btn-danger btn-sm"  (click)="delete(artist)"><i class="fa fa-times"></i> </button></td>
+  </tr>
+</table>
+
+
+</div>
+</div>
+<!-- End Edit Code -->
+

@@ -1,7 +1,7 @@
 <app-header
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/zitagon.png', width: 89, height: 25, alt: 'Zitagon Logo'}" 
+  [navbarBrandMinimized]="{src: 'assets/zitagon.png', width: 30, height: 30, alt: 'Zitagon Logo'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
@@ -9,10 +9,10 @@
       <a class="nav-link" href="#">Dashboard</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Users</a>
+      <a class="nav-link" href="#">{{get}}</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Settings</a>
+      <a class="nav-link " style="cursor: pointer" (click)="logoff()">Logoff</a>
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
@@ -323,6 +323,6 @@
   </app-aside>
 </div>
 <app-footer>
-  <span><a href="https://coreui.io">CoreUI</a> &copy; 2018 creativeLabs.</span>
-  <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span>
+  <span><a href="#">Black Continent</a> &copy; 2018 zitagon.</span>
+  <span class="ml-auto">Powered by <a href="#">Zitagon Music &copy;</a></span>
 </app-footer>
